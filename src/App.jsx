@@ -24,7 +24,12 @@ export default function App() {
   return (
     <>
     <div className='card-container'>
-        <Card />
+    {/* /* วน render card ออกมาตามจำนวนที่อยู่ใน array */}
+    {movies.map((ele) => {
+      return <Card key={ele.title} title={ele.title} image={ele.image}/>
+      {/* สำหรับ .map ถ้าไม่มีปีกกาต้องไม่มี return || ถ้ามีปีกกามี return */}
+    })}
+        {/* <Card /> */}
     </div>
     </>
   );
