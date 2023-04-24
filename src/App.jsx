@@ -1,5 +1,6 @@
 import Card from './Card/Card';
 import './App.css'
+import { useState } from 'react'
 
 const movies = [
   {
@@ -21,12 +22,42 @@ const movies = [
 
 export default function App() {
 
+  const [selectedMovie, setSelectedMovie] = useState([])
+
+  // const [movieTitle, setMovieTitle] = useState('')
+
+  const handleClick = (movieTitle) => {
+    // กดลบออกได้
+    if(selectedMovie.includes(movieTitle)){
+      setSelectedMovie(prev => {
+        return prev.filter(ele => ele !== movieTitle)
+      })
+    } else {
+      setSelectedMovie(prev => {
+        return [...prev, movieTitle]
+      })
+    }
+    // setMovieTitle(movieTitle)
+    // prev เอาค่า state เดิมออกมา (selectedMovie ส่งไปที่ prev)
+    //กดเลือกแล้วมีอัพเดทใน 
+    // setSelectedMovie((prev) => {
+    //   return [...prev, movieTitle]
+    // })
+  }
+
   return (
     <>
+    <ul>
+    {selectedMovie.map((movieTitle) => (
+        <li key={movieTitle}>{movieTitle}</li>
+      ))}
+    </ul>
+    
     <div className='card-container'>
+    {/* {movieTitle} */}
     {/* /* วน render card ออกมาตามจำนวนที่อยู่ใน array */}
     {movies.map((ele) => {
-      return <Card key={ele.title} title={ele.title} image={ele.image}/>
+      return <Card key={ele.title} handleClick={handleClick} title={ele.title} image={ele.image}/>
       {/* สำหรับ .map ถ้าไม่มีปีกกาต้องไม่มี return || ถ้ามีปีกกามี return */}
     })}
         {/* <Card /> */}

@@ -1,6 +1,6 @@
 import "./Card.css";
 
-export default function Card({title, image}) {
+export default function Card({title, image, handleClick}) {
   // console.log(props)
   return (
     <div className="movie-card">
@@ -15,7 +15,9 @@ export default function Card({title, image}) {
           {/* น้ำ ผีนองสยองขวัญ <br /> */} {title} <br />
           <span style={{ fontSize: "25px" }}>&#9989;</span>
         </h2>
-        <button className="movie-card__btn">เลือก</button>
+        <button onClick={() => { 
+          handleClick(title)
+           }} className="movie-card__btn">เลือก</button>
       </div>
     </div>
   );
